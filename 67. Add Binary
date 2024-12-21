@@ -1,0 +1,94 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        String answer = "";
+
+        boolean carry = false;
+        int aPtr = a.length() - 1;
+        int bPtr = b.length() - 1;
+
+        while(aPtr >= 0 && bPtr >= 0) {
+            if(carry) {
+                if(a.charAt(aPtr) == '1' && b.charAt(bPtr) == '1') {
+                    answer = "1" + answer;
+                    // No need to set carry to false...
+                }
+
+                else if((a.charAt(aPtr) == '0' && b.charAt(bPtr) == '1') ||
+                         (a.charAt(aPtr) == '1' && b.charAt(bPtr) == '0')) {
+                    answer = "0" + answer;
+                    // No need to set carry to false...
+                }
+
+                else {
+                    answer = "1" + answer;
+                    carry = false;
+                }
+            }
+
+            else {
+                if(a.charAt(aPtr) == '1' && b.charAt(bPtr) == '1') {
+                    answer = "0" + answer;
+                    carry = true;
+                }
+
+                else if((a.charAt(aPtr) == '0' && b.charAt(bPtr) == '1') ||
+                         (a.charAt(aPtr) == '1' && b.charAt(bPtr) == '0')) {
+                    answer = "1" + answer;
+                }
+
+                else {
+                    answer = "0" + answer;
+                }
+            }
+
+            aPtr--;
+            bPtr--;
+        }
+
+        while(aPtr >= 0) {
+            if(carry) {
+                if(a.charAt(aPtr) == '1') {
+                    answer = "0" + answer;
+                    // No need to set carry to false...
+                }
+
+                else {
+                    answer = "1" + answer;
+                    carry = false;
+                }
+            }
+
+            else {
+                answer = a.charAt(aPtr) + answer;
+            }
+
+            aPtr--;
+        }
+
+        while(bPtr >= 0) {
+            if(carry) {
+                if(b.charAt(bPtr) == '1') {
+                    answer = "0" + answer;
+                    // No need to set carry to false...
+                }
+
+                else {
+                    answer = "1" + answer;
+                    carry = false;
+                }
+            }
+
+            else {
+                answer = b.charAt(bPtr) + answer;
+            }
+
+            bPtr--;
+        }
+
+        if(carry) {
+            answer = "1" + answer;
+        }
+
+        return answer;
+    }
+}

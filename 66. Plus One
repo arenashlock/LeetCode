@@ -1,0 +1,44 @@
+class Solution {
+    public int[] plusOne(int[] digits) {
+        int[] answer = digits;
+        int place = digits.length - 1;
+
+        while(true) {
+            answer[place] = (answer[place] + 1) % 10;
+
+            if(answer[place] != 0) {
+                break;
+            }
+
+            place--;
+
+            if(place < 0) {
+                break;
+            }
+        }
+
+        if(place == -1) {
+            int[] newAnswer = new int[answer.length + 1];
+            // Need to go back to first spot in array
+            place++;
+            int temp = answer[0];
+
+            while(place < answer.length) {
+                if(place == 0) {
+                    newAnswer[0] = 1;
+                }
+
+                else {
+                    newAnswer[place + 1] = temp;
+                    temp = answer[place];
+                }
+
+                place++;
+            }
+
+            return newAnswer;
+        }
+
+        return answer;
+    }
+}

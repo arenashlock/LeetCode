@@ -1,0 +1,29 @@
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int l1 = 0;
+        int l2 = 0;
+        int[] temp1 = nums1.clone();
+
+        while (l1 < m && l2 < n) {
+            if(temp1[l1] <= nums2[l2]) {
+                nums1[l1 + l2] = temp1[l1];
+                l1++;
+            }
+
+            else {
+                nums1[l1 + l2] = nums2[l2];
+                l2++;
+            }
+        }
+
+        while (l1 < m) {
+            nums1[l1 + l2] = temp1[l1];
+            l1++;
+        }
+
+        while (l2 < n) {
+            nums1[l1 + l2] = nums2[l2];
+            l2++;
+        }
+    }
+}

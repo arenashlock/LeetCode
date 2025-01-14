@@ -1,0 +1,21 @@
+class Solution {
+    public int climbStairs(int n) {
+        if(n == 1) {
+            return 1;
+        }
+
+        else if(n == 2) {
+            return 2;
+        }
+
+        int[] dpArray = new int[n];
+        dpArray[0] = 1;
+        dpArray[1] = 2;
+
+        for(int i = 2; i < n; i++) {
+            dpArray[i] = dpArray[i - 2] + dpArray[i - 1];
+        }
+
+        return dpArray[n - 1];
+    }
+}
